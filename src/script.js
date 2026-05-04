@@ -6,15 +6,15 @@ let clickPower = Number(localStorage.getItem("clickPower")) || 1;
 
 const achievements = [
   { id: 1, title: "Перший крок", desc: "Видобуто 10 титану", target: 10, type: "titan", earned: false },
-  { id: 2, title: "Старатель", desc: "Видобуто 100 титану", target: 100, type: "titan", earned: false },
-  { id: 3, title: "Майстер кліку", desc: "Сила кліку досягла 5", target: 5, type: "click", earned: false },
+  { id: 2, title: "Роботящий", desc: "Видобуто 100 титану", target: 100, type: "titan", earned: false },
+  { id: 3, title: "Майстер ",desc: "Сила кліку досягла 5", target: 5, type: "click", earned: false },
   { id: 4, title: "Автоматизація", desc: "Автовидобуток досяг 5/с", target: 5, type: "auto", earned: false },
-  { id: 5, title: "Титанова лихоманка", desc: "Накопичено 1 000 титану", target: 1000, type: "titan", earned: false },
+  { id: 5, title: "Титановтй  магнат", desc: "Накопичено 1 000 титану", target: 1000, type: "titan", earned: false },
   { id: 6, title: "Бур-майстер", desc: "Сила кліку досягла 20", target: 20, type: "click", earned: false },
   { id: 7, title: "Мала фабрика", desc: "Автовидобуток досяг 50/с", target: 50, type: "auto", earned: false },
-  { id: 8, title: "Багатій", desc: "Накопичено 10 000 титану", target: 10000, type: "titan", earned: false },
-  { id: 9, title: "Промисловий гігант", desc: "Автовидобуток досяг 200/с", target: 200, type: "auto", earned: false },
-  { id: 10, title: "Півшляху", desc: "Зібрано 500 000 титану", target: 500000, type: "titan", earned: false }
+  { id: 8, title: "Крутий", desc: "Накопичено 10 000 титану", target: 10000, type: "titan", earned: false },
+  { id: 9, title: "гігант", desc: "Автовидобуток досяг 200/с", target: 200, type: "auto", earned: false },
+  { id: 10, title: "Половинка", desc: "Зібрано 500 000 титану", target: 500000, type: "titan", earned: false }
 ];
 
 
