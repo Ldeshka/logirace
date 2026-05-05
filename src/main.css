@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    background: #050505;
+    color: white;
+    font-family: 'Orbitron', sans-serif; /* Якщо є можливість, підключіть космічний шрифт */
+    overflow: hidden;
+    user-select: none;
+}
+
+.clicker { display: flex; height: 100vh; }
+
+.game {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    cursor: crosshair;
+}
+
+#marsVid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.stats-overlay {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #ff7b00;
+    pointer-events: none;
+}
+
+.stats-overlay p { margin: 5px 0; font-size: 24px; color: #ff7b00; text-shadow: 2px 2px 5px black; }
+
+.finishMission {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    z-index: 10;
+    background: #1a1a1a;
+    border: 2px solid #ff7b00;
+    color: #ff7b00;
+    padding: 15px 25px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.finishMission:hover { background: #ff7b00; color: black; }
+
+/* Ефект Хвилі */
+.ripple {
+    position: absolute;
+    background: rgba(255, 123, 0, 0.5);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border-radius: 50%;
+    animation: ripple-animation 0.8s linear;
+    z-index: 5;
+}
+
+@keyframes ripple-animation {
+    from { width: 0; height: 0; opacity: 1; }
+    to { width: var(--size); height: var(--size); opacity: 0; }
+}
+
+.shops {
+    width: 350px;
+    background: #080808;
+    border-left: 2px solid #222;
+    padding: 15px;
+    overflow-y: auto;
+    z-index: 20;
+}
+
+.shop {
+    background: #151515;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    transition: 0.2s;
+}
+
+.shop:not(.bought):hover { background: #222; border-color: #ff7b00; cursor: pointer; }
+.shop.bought { opacity: 0.3; cursor: default; border-color: #00ff00; }

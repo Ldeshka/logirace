@@ -1,109 +1,138 @@
-let titan = Number(localStorage.getItem("titan")) || 0;
-let autoMoney = Number(localStorage.getItem("autoMoney")) || 0;
-let clickPower = Number(localStorage.getItem("clickPower")) || 1;
+// --- ЗАВАНТАЖЕННЯ ДАНИХ (Студентський стиль через if-else) ---
+let titan;
+if (localStorage.getItem("titan")) {
+    titan = +localStorage.getItem("titan");
+} else {
+    titan = 0;
+}
 
+let autoMoney;
+if (localStorage.getItem("autoMoney")) {
+    autoMoney = +localStorage.getItem("autoMoney");
+} else {
+    autoMoney = 0;
+}
 
+let clickPower;
+if (localStorage.getItem("clickPower")) {
+    clickPower = +localStorage.getItem("clickPower");
+} else {
+    clickPower = 1;
+}
 
+let boughtItems = [];
+if (localStorage.getItem("boughtItems")) {
+    boughtItems = localStorage.getItem("boughtItems").split(",");
+}
+
+// --- СИСТЕМА ДОСЯГНЕНЬ ---
 const achievements = [
-  { id: 1, title: "Перший крок", desc: "Видобуто 10 титану", target: 10, type: "titan", earned: false },
-  { id: 2, title: "Роботящий", desc: "Видобуто 100 титану", target: 100, type: "titan", earned: false },
-  { id: 3, title: "Майстер ",desc: "Сила кліку досягла 5", target: 5, type: "click", earned: false },
-  { id: 4, title: "Автоматизація", desc: "Автовидобуток досяг 5/с", target: 5, type: "auto", earned: false },
-  { id: 5, title: "Титановтй  магнат", desc: "Накопичено 1 000 титану", target: 1000, type: "titan", earned: false },
-  { id: 6, title: "Бур-майстер", desc: "Сила кліку досягла 20", target: 20, type: "click", earned: false },
-  { id: 7, title: "Мала фабрика", desc: "Автовидобуток досяг 50/с", target: 50, type: "auto", earned: false },
-  { id: 8, title: "Крутий", desc: "Накопичено 10 000 титану", target: 10000, type: "titan", earned: false },
-  { id: 9, title: "гігант", desc: "Автовидобуток досяг 200/с", target: 200, type: "auto", earned: false },
-  { id: 10, title: "Половинка", desc: "Зібрано 500 000 титану", target: 500000, type: "titan", earned: false }
+    { title: "Перша руда", desc: "Видобуто 10 титану", target: 10, type: "titan", earned: false },
+    { title: "Автоматизація", desc: "Автовидобуток досяг 20/с", target: 20, type: "auto", earned: false },
+    { title: "Гіпер-клік", desc: "Сила кліку досягла 50", target: 50, type: "click", earned: false },
+    { title: "Мільйонер", desc: "Накопичено 1 000 000 титану", target: 1000000, type: "titan", earned: false }
 ];
 
-
-function showAchievement(ach) {
-  const box = document.getElementById("achievement-box");
-  document.getElementById("ach-title").innerText = ach.title;
-  document.getElementById("ach-desc").innerText = ach.desc;
-
-  box.classList.add("show");
-  
- 
-  setTimeout(() => {
-    box.classList.remove("show");
-  }, 4000);
-}
-
-
 function checkAchievements() {
-  achievements.forEach(ach => {
-    if (!ach.earned) {
-      let currentVal = 0;
-      if (ach.type === "titan") currentVal = titan;
-      if (ach.type === "click") currentVal = clickPower;
-      if (ach.type === "auto") currentVal = autoMoney;
+    achievements.forEach(ach => {
+        if (ach.earned == false) {
+            let val = 0;
+            if (ach.type == "titan") val = titan;
+            if (ach.type == "auto") val = autoMoney;
+            if (ach.type == "click") val = clickPower;
 
-      if (currentVal >= ach.target) {
-        ach.earned = true;
-        showAchievement(ach);
-      }
-    }
-  });
+            if (val >= ach.target) {
+                ach.earned = true;
+                const box = document.querySelector("#achievement-box");
+                document.querySelector("#ach-title").innerText = ach.title;
+                document.querySelector("#ach-desc").innerText = ach.desc;
+                box.classList.add("show");
+                setTimeout(() => box.classList.remove("show"), 4000);
+            }
+        }
+    });
 }
 
+// --- ЕФЕКТ КЛІКУ ---
+function createRipple(e) {
+    const zone = document.querySelector("#clickZone");
+    const ripple = document.createElement("span");
+    ripple.classList.add("ripple");
+    zone.appendChild(ripple);
 
+    ripple.style.left = e.clientX + "px";
+    ripple.style.top = e.clientY + "px";
+
+    let currentSize = 100 + (clickPower * 4);
+    ripple.style.setProperty("--size", currentSize + "px");
+
+    if (clickPower > 50) ripple.style.background = "rgba(255, 50, 0, 0.8)";
+
+    setTimeout(() => ripple.remove(), 700);
+}
+
+// --- ОНОВЛЕННЯ ЕКРАНУ ---
 const oresDisplay = document.querySelector(".ores");
-const moneys = document.querySelector(".money\\/s");
-const clickButton = document.querySelector(".clickButton");
+// Використовуємо твій оригінальний клас із екрануванням косої риски
+const autoDisplay = document.querySelector(".money\\/s");
 
 function update() {
-  oresDisplay.innerText = Math.floor(titan);
-  moneys.innerText = autoMoney;
+    oresDisplay.innerText = titan;
+    autoDisplay.innerText = autoMoney;
+    
+    checkAchievements();
 
-  checkAchievements(); 
-
-  localStorage.setItem("titan", titan);
-  localStorage.setItem("autoMoney", autoMoney);
-  localStorage.setItem("clickPower", clickPower);
+    localStorage.setItem("titan", titan);
+    localStorage.setItem("autoMoney", autoMoney);
+    localStorage.setItem("clickPower", clickPower);
+    localStorage.setItem("boughtItems", boughtItems.join(","));
 }
 
-clickButton.onclick = () => {
-  titan += clickPower;
-  update();
+// --- КЛІК ПО МАРСУ ---
+document.querySelector("#clickZone").onclick = (e) => {
+    titan = titan + clickPower;
+    createRipple(e);
+    update();
 };
 
+// --- МАГАЗИН ---
 document.querySelectorAll(".shop").forEach(item => {
-  item.onclick = () => {
-    const price = +item.querySelector(".price").innerText;
-    
-    if (titan >= price) {
-      titan -= price;
-      const bonusText = item.querySelector("b").innerText;
-      const bonusValue = +bonusText.match(/\d+/);
+    const title = item.querySelector("b").innerText;
 
-      if (bonusText.includes("/с")) {
-        autoMoney += bonusValue;
-      } else {
-        clickPower += bonusValue;
-      }
-      update();
-    } else {
-      item.style.borderColor = "red";
-      setTimeout(() => item.style.borderColor = "#222", 200);
+    for (let i = 0; i < boughtItems.length; i++) {
+        if (boughtItems[i] == title) item.classList.add("bought");
     }
-  };
+
+    item.onclick = () => {
+        if (item.classList.contains("bought")) return;
+
+        const price = +item.querySelector(".price").innerText;
+
+        if (titan >= price) {
+            titan = titan - price;
+            
+            let bonus = parseInt(title.split("+")[1]);
+
+            if (title.includes("/с")) {
+                autoMoney = autoMoney + bonus;
+            } else {
+                clickPower = clickPower + bonus;
+            }
+
+            boughtItems.push(title);
+            item.classList.add("bought");
+            update();
+        } else {
+            item.style.borderColor = "red";
+            setTimeout(() => item.style.borderColor = "#333", 300);
+        }
+    };
 });
 
-document.querySelector(".finishMission").onclick = () => {
-  if (titan >= 1000000) {
-    alert("ВІТАЄМО! Місія завершена!");
-    titan -= 1000000;
-    update();
-  } else {
-    alert("Недостатньо титану! Треба ще " + (1000000 - Math.floor(titan)));
-  }
-};
-
+// --- ПАСИВНИЙ ДОХІД ---
 setInterval(() => {
-  titan += autoMoney;
-  update();
+    titan = titan + autoMoney;
+    update();
 }, 1000);
 
 update();

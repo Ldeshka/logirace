@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mars Clicker</title>
+    <link rel="stylesheet" href="src/main.css" />
+</head>
+<body>
+    <div class="clicker">
+        <!-- Ліва частина: Відео-кнопка та статистика -->
+        <div class="game" id="clickZone">
+            <video autoplay muted loop id="marsVid">
+                <source src="assets/videoplayback (online-video-cutter.com).mp4" type="video/mp4" />
+            </video>
+            
+            <div class="stats-overlay">
+                <p>титан: <span class="ores">0</span> 🌑</p>
+
+                <p>авто: <span class="money/s">0</span>/с🌑</p>
+            </div>
+
+            <div class="marsBaccground"></div>
+            <button class="finishMission">Завершити місію (1 000 000)</button>
+        </div>
+
+        <!-- Права частина: Магазин -->
+        <div class="shops">
+            <h3>верстат</h3>
+            <div class="shop"><b>Кисневий модуль (+2/с)</b><p>Ціна: <span class="price">100</span></p></div>
+            <div class="shop"><b>Модуль живлення (+7/с)</b><p>Ціна: <span class="price">1000</span></p></div>
+            <div class="shop"><b>Сонячна панель (+14/с)</b><p>Ціна: <span class="price">5000</span></p></div>
+            <div class="shop"><b>Бурова станція I (+20/с)</b><p>Ціна: <span class="price">10000</span></p></div>
+            <div class="shop"><b>Теплоелектростанція (+12/с)</b><p>Ціна: <span class="price">20000</span></p></div>
+            <div class="shop"><b>Станція II (+25/с)</b><p>Ціна: <span class="price">50000</span></p></div>
+            <div class="shop"><b>Станція XXL (+50/с)</b><p>Ціна: <span class="price">99999</span></p></div>
+
+            <h3>Кірочка</h3>
+            <div class="shop"><b>Палка (+2)</b><p>Ціна: <span class="price">150</span></p></div>
+            <div class="shop"><b>Кірка (+7)</b><p>Ціна: <span class="price">500</span></p></div>
+            <div class="shop"><b>Непрацюючий бур (+10)</b><p>Ціна: <span class="price">2000</span></p></div>
+            <div class="shop"><b>Бур (+15)</b><p>Ціна: <span class="price">7000</span></p></div>
+            <div class="shop"><b>Бур під стероїдами (+25)</b><p>Ціна: <span class="price">13000</span></p></div>
+            <div class="shop"><b>Костюм КРАБ (+42)</b><p>Ціна: <span class="price">42424</span></p></div>
+            <div class="shop"><b>Рукавиця нескінченності (+67)</b><p>Ціна: <span class="price">67676</span></p></div>
+        </div>
+    </div>
+
+    <!-- Блок для досягнень (обов'язково має бути для роботи JS) -->
+    <div id="achievement-box" class="achievement">
+        <div class="ach-icon">🏆</div>
+        <div class="ach-text">
+            <b id="ach-title">Досягнення!</b>
+            <p id="ach-desc"></p>
+        </div>
+    </div>
+
+    <script src="src/script.js"></script>
+</body>
+</html>
