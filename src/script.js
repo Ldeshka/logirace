@@ -1,4 +1,4 @@
-// --- ЗАВАНТАЖЕННЯ ДАНИХ (Студентський стиль через if-else) ---
+
 let titan;
 if (localStorage.getItem("titan")) {
     titan = +localStorage.getItem("titan");
@@ -25,7 +25,7 @@ if (localStorage.getItem("boughtItems")) {
     boughtItems = localStorage.getItem("boughtItems").split(",");
 }
 
-// --- СИСТЕМА ДОСЯГНЕНЬ ---
+
 const achievements = [
     { title: "Перша руда", desc: "Видобуто 10 титану", target: 10, type: "titan", earned: false },
     { title: "Автоматизація", desc: "Автовидобуток досяг 20/с", target: 20, type: "auto", earned: false },
@@ -53,7 +53,7 @@ function checkAchievements() {
     });
 }
 
-// --- ЕФЕКТ КЛІКУ ---
+
 function createRipple(e) {
     const zone = document.querySelector("#clickZone");
     const ripple = document.createElement("span");
@@ -71,9 +71,9 @@ function createRipple(e) {
     setTimeout(() => ripple.remove(), 700);
 }
 
-// --- ОНОВЛЕННЯ ЕКРАНУ ---
+
 const oresDisplay = document.querySelector(".ores");
-// Використовуємо твій оригінальний клас із екрануванням косої риски
+
 const autoDisplay = document.querySelector(".money\\/s");
 
 function update() {
@@ -88,14 +88,14 @@ function update() {
     localStorage.setItem("boughtItems", boughtItems.join(","));
 }
 
-// --- КЛІК ПО МАРСУ ---
+
 document.querySelector("#clickZone").onclick = (e) => {
     titan = titan + clickPower;
     createRipple(e);
     update();
 };
 
-// --- МАГАЗИН ---
+
 document.querySelectorAll(".shop").forEach(item => {
     const title = item.querySelector("b").innerText;
 
@@ -129,7 +129,6 @@ document.querySelectorAll(".shop").forEach(item => {
     };
 });
 
-// --- ПАСИВНИЙ ДОХІД ---
 setInterval(() => {
     titan = titan + autoMoney;
     update();
