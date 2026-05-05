@@ -2,7 +2,6 @@ body {
     margin: 0;
     background: #050505;
     color: white;
-    font-family: 'Orbitron', sans-serif; /* Якщо є можливість, підключіть космічний шрифт */
     overflow: hidden;
     user-select: none;
 }
@@ -55,7 +54,7 @@ body {
 
 .finishMission:hover { background: #ff7b00; color: black; }
 
-/* Ефект Хвилі */
+
 .ripple {
     position: absolute;
     background: rgba(255, 123, 0, 0.5);
