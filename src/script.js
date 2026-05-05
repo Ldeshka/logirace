@@ -129,6 +129,7 @@ document.querySelectorAll(".shop").forEach(item => {
     };
 });
 
+
 setInterval(() => {
     titan = titan + autoMoney;
     update();
